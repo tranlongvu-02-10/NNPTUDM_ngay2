@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Management</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+
+    <style>
+      * {
+        font-family: 'Inter', sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 40px 0;
+      }
+
+      .main-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 40px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 40px;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      h1::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        border-radius: 2px;
+      }
+
+      .controls-section {
+        background: #f7fafc;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .form-control,
+      .form-select {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .btn {
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+      }
+
+      .btn-success {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+      }
+
+      .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+      }
+
+      .btn-warning {
+        background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(246, 173, 85, 0.4);
+      }
+
+      .btn-warning:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(246, 173, 85, 0.5);
+        color: white;
+      }
+
+      .btn-danger {
+        background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+        box-shadow: 0 4px 15px rgba(252, 129, 129, 0.4);
+      }
+
+      .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(252, 129, 129, 0.5);
+      }
+
+      .btn-sm {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      .table-responsive {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .table {
+        margin-bottom: 0;
+      }
+
+      .table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .table thead th {
+        border: none;
+        padding: 18px 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+      }
+
+      .table tbody tr {
+        transition: all 0.3s ease;
+      }
+
+      .table tbody tr:hover {
+        background-color: #f7fafc;
+        transform: scale(1.01);
+      }
+
+      .table tbody td {
+        vertical-align: middle;
+        padding: 20px 15px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .product-img {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        max-width: 80px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-img:hover {
+        transform: scale(1.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .img-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      .img-description {
+        display: none;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.95);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        z-index: 1000;
+        max-width: 300px;
+        font-size: 12px;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        line-height: 1.5;
+      }
+
+      .img-description::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid rgba(0, 0, 0, 0.95);
+      }
+
+      .img-container:hover .img-description {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      .badge {
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 12px;
+      }
+
+      .badge-category {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .price-tag {
+        color: #48bb78;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .modal-content {
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px 20px 0 0;
+        padding: 25px 30px;
+        border: none;
+      }
+
+      .modal-title {
+        font-weight: 700;
+        font-size: 24px;
+      }
+
+      .modal-body {
+        padding: 30px;
+      }
+
+      .modal-footer {
+        border-top: 1px solid #e2e8f0;
+        padding: 20px 30px;
+      }
+
+      .btn-close {
+        filter: brightness(0) invert(1);
+      }
+
+      .pagination {
+        margin-top: 30px;
+      }
+
+      .page-link {
+        border: 2px solid #e2e8f0;
+        color: #667eea;
+        margin: 0 5px;
+        border-radius: 10px;
+        padding: 10px 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .page-link:hover {
+        background: #667eea;
+        border-color: #667eea;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .page-item.active .page-link {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #667eea;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .form-label {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .main-container {
+          padding: 20px;
+          border-radius: 15px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .controls-section {
+          padding: 15px;
+        }
+
+        .table {
+          font-size: 13px;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          font-size: 13px;
+        }
+      }
+
+      /* Search input icon */
+      .search-wrapper {
+        position: relative;
+      }
+
+      .search-wrapper::before {
+        content: '\F52A';
+        font-family: 'bootstrap-icons';
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #a0aec0;
+        font-size: 16px;
+        z-index: 1;
+      }
+
+      .search-wrapper input {
+        padding-left: 45px;
+      }
+
+      /* Loading animation */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-container">
+        <h1 class="text-center">
+          <i class="bi bi-bag-check-fill me-2"></i>Quản Lý Sản Phẩm
+        </h1>
+
+        <!-- Search and Sort Controls -->
+        <div class="controls-section">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">
+                <i class="bi bi-search me-2"></i>Tìm kiếm
+              </label>
+              <div class="search-wrapper">
+                <input
+                  type="text"
+                  id="searchInput"
+                  class="form-control"
+                  placeholder="Nhập tên sản phẩm để tìm kiếm..."
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">
+                <i class="bi bi-sort-down me-2"></i>Sắp xếp
+              </label>
+              <select class="form-select" id="sortSelect">
+                <option value="">-- Chọn sắp xếp --</option>
+                <option value="name-asc">Tên (A → Z)</option>
+                <option value="name-desc">Tên (Z → A)</option>
+                <option value="price-asc">Giá (Thấp → Cao)</option>
+                <option value="price-desc">Giá (Cao → Thấp)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Table -->
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><i class="bi bi-hash me-2"></i>ID</th>
+                <th><i class="bi bi-tag me-2"></i>Tên Sản Phẩm</th>
+                <th><i class="bi bi-cash me-2"></i>Giá</th>
+                <th><i class="bi bi-folder me-2"></i>Danh Mục</th>
+                <th><i class="bi bi-image me-2"></i>Hình Ảnh</th>
+              </tr>
+            </thead>
+            <tbody class="table-id"></tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav>
+          <ul class="pagination justify-content-center" id="pagination"></ul>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap JS + Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="./main.js"></script>
+  </body>
+</html>
