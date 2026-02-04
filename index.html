@@ -1,57 +1,35 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Management</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-
-    <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
-    />
-
     <style>
-      * {
-        font-family: 'Inter', sans-serif;
-      }
-
       body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         min-height: 100vh;
-        padding: 40px 0;
+        padding: 20px 0;
       }
 
-      .main-container {
+      .container {
         background: white;
         border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        padding: 40px;
-        max-width: 1400px;
-        margin: 0 auto;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        margin-top: 20px;
+        margin-bottom: 30px;
       }
 
       h1 {
         font-weight: 700;
-        color: #2d3748;
-        margin-bottom: 40px;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        text-align: center;
         position: relative;
         padding-bottom: 15px;
       }
@@ -62,140 +40,141 @@
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 100px;
+        width: 80px;
         height: 4px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
+        background: linear-gradient(90deg, #3498db, #2ecc71);
         border-radius: 2px;
       }
 
-      .controls-section {
-        background: #f7fafc;
-        padding: 25px;
+      /* Search and Sort Section */
+      .row.mb-4 {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
         border-radius: 15px;
-        margin-bottom: 30px;
-        border: 1px solid #e2e8f0;
+        color: white;
+        margin-bottom: 25px !important;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
       }
 
-      .form-control,
-      .form-select {
-        border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 12px 16px;
-        transition: all 0.3s ease;
-        font-size: 14px;
-      }
-
-      .form-control:focus,
-      .form-select:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-      }
-
-      .btn {
-        border-radius: 10px;
-        padding: 12px 24px;
-        font-weight: 600;
-        transition: all 0.3s ease;
+      #searchInput,
+      #sortSelect,
+      #itemsPerPage {
+        background: rgba(255, 255, 255, 0.95);
         border: none;
+        border-radius: 10px;
+        padding: 12px 15px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      #searchInput:focus,
+      #sortSelect:focus,
+      #itemsPerPage:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        outline: none;
+        border-color: #3498db;
+      }
+
+      #searchInput {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23667eea' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: 15px center;
+        background-size: 18px;
+        padding-left: 45px;
+      }
+
+      /* Add Product Button */
+      .mb-3 {
+        margin-bottom: 25px !important;
       }
 
       .btn-success {
-        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-        box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+        background: linear-gradient(90deg, #2ecc71, #1abc9c);
+        border: none;
+        border-radius: 12px;
+        padding: 12px 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
       }
 
       .btn-success:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+        background: linear-gradient(90deg, #27ae60, #16a085);
       }
 
-      .btn-primary {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-      }
-
-      .btn-warning {
-        background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
-        color: white;
-        box-shadow: 0 4px 15px rgba(246, 173, 85, 0.4);
-      }
-
-      .btn-warning:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(246, 173, 85, 0.5);
-        color: white;
-      }
-
-      .btn-danger {
-        background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
-        box-shadow: 0 4px 15px rgba(252, 129, 129, 0.4);
-      }
-
-      .btn-danger:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(252, 129, 129, 0.5);
-      }
-
-      .btn-sm {
-        padding: 8px 16px;
-        font-size: 13px;
-      }
-
+      /* Table */
       .table-responsive {
         border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        margin-bottom: 30px;
+        border: 1px solid #eef1f5;
       }
 
       .table {
         margin-bottom: 0;
+        border-collapse: separate;
+        border-spacing: 0;
       }
 
       .table thead {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: linear-gradient(90deg, #3498db, #2980b9);
       }
 
-      .table thead th {
-        border: none;
-        padding: 18px 15px;
+      .table th {
         font-weight: 600;
+        text-align: center;
+        vertical-align: middle;
+        padding: 16px 15px;
+        border: none;
+        color: white;
+        font-size: 1rem;
         text-transform: uppercase;
-        font-size: 13px;
         letter-spacing: 0.5px;
       }
 
       .table tbody tr {
         transition: all 0.3s ease;
+        border-bottom: 1px solid #f1f3f5;
       }
 
       .table tbody tr:hover {
-        background-color: #f7fafc;
-        transform: scale(1.01);
+        background-color: rgba(52, 152, 219, 0.06);
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
       }
 
-      .table tbody td {
+      .table td {
         vertical-align: middle;
-        padding: 20px 15px;
-        border-bottom: 1px solid #e2e8f0;
+        padding: 14px 15px;
+        border: none;
+        font-weight: 500;
       }
 
+      /* Image */
       .product-img {
-        cursor: pointer;
-        transition: all 0.3s ease;
-        max-width: 80px;
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
         border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border: 3px solid white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        background: linear-gradient(45deg, #f8f9fa, #e9ecef);
       }
 
       .product-img:hover {
-        transform: scale(1.15);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transform: scale(1.2) rotate(2deg);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-color: #3498db;
       }
 
       .img-container {
@@ -206,268 +185,419 @@
       .img-description {
         display: none;
         position: absolute;
-        background: rgba(0, 0, 0, 0.95);
-        color: white;
-        padding: 15px;
-        border-radius: 10px;
-        z-index: 1000;
-        max-width: 300px;
-        font-size: 12px;
-        bottom: 90px;
+        bottom: calc(100% + 10px);
         left: 50%;
-        transform: translateX(-50%);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transform: translateX(-50%) translateY(5px);
+        background: rgba(0, 0, 0, 0.92);
+        color: white;
+        padding: 12px 15px;
+        border-radius: 10px;
+        font-size: 13px;
+        max-width: 280px;
+        width: max-content;
+        z-index: 1000;
+        white-space: pre-wrap;
         line-height: 1.5;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        opacity: 0;
+        transition: all 0.3s ease;
       }
 
       .img-description::after {
         content: '';
         position: absolute;
-        bottom: -8px;
+        top: 100%;
         left: 50%;
         transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid rgba(0, 0, 0, 0.95);
+        border: 8px solid transparent;
+        border-top-color: rgba(0, 0, 0, 0.92);
       }
 
       .img-container:hover .img-description {
         display: block;
-        animation: fadeIn 0.3s ease;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateX(-50%) translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(-50%) translateY(0);
-        }
-      }
-
-      .badge {
-        padding: 8px 14px;
-        border-radius: 20px;
+      /* Action Buttons */
+      .btn-sm {
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
         font-weight: 500;
-        font-size: 12px;
+        transition: all 0.2s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        margin: 0 3px;
       }
 
-      .badge-category {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      .btn-warning {
+        background: linear-gradient(90deg, #f39c12, #e67e22);
         color: white;
       }
 
-      .price-tag {
-        color: #48bb78;
-        font-weight: 700;
-        font-size: 16px;
-      }
-
-      .modal-content {
-        border-radius: 20px;
-        border: none;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      }
-
-      .modal-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      .btn-danger {
+        background: linear-gradient(90deg, #e74c3c, #c0392b);
         color: white;
-        border-radius: 20px 20px 0 0;
-        padding: 25px 30px;
-        border: none;
       }
 
-      .modal-title {
-        font-weight: 700;
-        font-size: 24px;
+      .btn-warning:hover,
+      .btn-danger:hover {
+        transform: translateY(-2px);
+        filter: brightness(110%);
       }
 
-      .modal-body {
-        padding: 30px;
-      }
-
-      .modal-footer {
-        border-top: 1px solid #e2e8f0;
-        padding: 20px 30px;
-      }
-
-      .btn-close {
-        filter: brightness(0) invert(1);
-      }
-
+      /* Pagination */
       .pagination {
-        margin-top: 30px;
+        margin-top: 25px;
       }
 
       .page-link {
-        border: 2px solid #e2e8f0;
-        color: #667eea;
-        margin: 0 5px;
-        border-radius: 10px;
-        padding: 10px 16px;
-        font-weight: 600;
+        border: none;
+        border-radius: 8px !important;
+        margin: 0 3px;
+        color: #3498db;
+        font-weight: 500;
+        padding: 8px 15px;
         transition: all 0.3s ease;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
       }
 
       .page-link:hover {
-        background: #667eea;
-        border-color: #667eea;
+        background: linear-gradient(90deg, #3498db, #2980b9);
         color: white;
         transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
       }
 
       .page-item.active .page-link {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-color: #667eea;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        background: linear-gradient(90deg, #2ecc71, #27ae60);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+      }
+
+      /* Modal */
+      .modal-content {
+        border-radius: 16px;
+        border: none;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+      }
+
+      .modal-header {
+        background: linear-gradient(90deg, #3498db, #2980b9);
+        color: white;
+        padding: 20px;
+        border-bottom: none;
+      }
+
+      .modal-title {
+        font-weight: 600;
+        font-size: 1.4rem;
+      }
+
+      .btn-close {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        padding: 8px;
+        transition: all 0.3s ease;
+        opacity: 0.8;
+      }
+
+      .btn-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+        opacity: 1;
+      }
+
+      .modal-body {
+        padding: 25px;
       }
 
       .form-label {
         font-weight: 600;
-        color: #2d3748;
+        color: #2c3e50;
         margin-bottom: 8px;
-        font-size: 14px;
+        font-size: 0.95rem;
       }
 
-      .action-buttons {
-        display: flex;
-        gap: 8px;
+      .form-control {
+        border: 2px solid #eef1f5;
+        border-radius: 10px;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.2);
+        transform: translateY(-1px);
+      }
+
+      .modal-footer {
+        border-top: 1px solid #eef1f5;
+        padding: 20px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(90deg, #3498db, #2980b9);
+        border: none;
+        border-radius: 10px;
+        padding: 10px 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        background: linear-gradient(90deg, #2980b9, #1c6ea4);
+      }
+
+      .btn-secondary {
+        background: linear-gradient(90deg, #95a5a6, #7f8c8d);
+        border: none;
+        border-radius: 10px;
+        padding: 10px 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        background: linear-gradient(90deg, #7f8c8d, #6c7b7d);
+        transform: translateY(-3px);
+      }
+
+      /* Price column styling */
+      td:nth-child(3) {
+        font-weight: 600;
+        color: #2ecc71;
+      }
+
+      /* Category column styling */
+      td:nth-child(4) {
+        font-style: italic;
+        color: #7f8c8d;
       }
 
       /* Responsive adjustments */
       @media (max-width: 768px) {
-        .main-container {
+        .container {
           padding: 20px;
           border-radius: 15px;
         }
-
-        h1 {
-          font-size: 24px;
-        }
-
-        .controls-section {
+        
+        .row.mb-4 {
           padding: 15px;
         }
-
-        .table {
-          font-size: 13px;
+        
+        .product-img {
+          width: 60px;
+          height: 60px;
         }
-
-        .btn {
-          padding: 10px 20px;
-          font-size: 13px;
+        
+        .table th,
+        .table td {
+          padding: 10px 8px;
+          font-size: 0.9rem;
+        }
+        
+        .btn-sm {
+          padding: 5px 8px;
+          font-size: 0.8rem;
+          margin: 2px 0;
+        }
+        
+        .modal-dialog {
+          margin: 10px;
+        }
+        
+        .modal-body {
+          padding: 20px;
         }
       }
 
-      /* Search input icon */
-      .search-wrapper {
-        position: relative;
-      }
-
-      .search-wrapper::before {
-        content: '\F52A';
-        font-family: 'bootstrap-icons';
-        position: absolute;
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #a0aec0;
-        font-size: 16px;
-        z-index: 1;
-      }
-
-      .search-wrapper input {
-        padding-left: 45px;
-      }
-
-      /* Loading animation */
-      .loading {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: white;
-        animation: spin 1s ease-in-out infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
+      @media (max-width: 576px) {
+        .table-responsive {
+          border-radius: 10px;
+        }
+        
+        .product-img {
+          width: 50px;
+          height: 50px;
+        }
+        
+        .img-description {
+          max-width: 200px;
+          font-size: 12px;
+          padding: 8px 10px;
         }
       }
     </style>
+    <script defer src="/main.js"></script>
   </head>
   <body>
-    <div class="container">
-      <div class="main-container">
-        <h1 class="text-center">
-          <i class="bi bi-bag-check-fill me-2"></i>Quản Lý Sản Phẩm
-        </h1>
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Product Management</h1>
 
-        <!-- Search and Sort Controls -->
-        <div class="controls-section">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">
-                <i class="bi bi-search me-2"></i>Tìm kiếm
-              </label>
-              <div class="search-wrapper">
+      <!-- Search and Sort Controls -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="Tìm kiếm theo tên..."
+          />
+        </div>
+        <div class="col-md-4">
+          <select class="form-select" id="sortSelect" onchange="handleSort()">
+            <option value="">-- Chọn sắp xếp --</option>
+            <option value="name-asc">Tên (A → Z)</option>
+            <option value="name-desc">Tên (Z → A)</option>
+            <option value="price-asc">Giá (Thấp → Cao)</option>
+            <option value="price-desc">Giá (Cao → Thấp)</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select
+            class="form-select"
+            id="itemsPerPage"
+            onchange="changeItemsPerPage()"
+          >
+            <option value="5">5 / trang</option>
+            <option value="10" selected>10 / trang</option>
+            <option value="20">20 / trang</option>
+            <option value="50">50 / trang</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Add Product Button -->
+      <div class="mb-3">
+        <button
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#productModal"
+          onclick="openAddModal()"
+        >
+          + Thêm Sản Phẩm
+        </button>
+      </div>
+
+      <!-- Products Table -->
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Images</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-id"></tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <nav>
+        <ul class="pagination justify-content-center" id="pagination"></ul>
+      </nav>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Thêm Sản Phẩm</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="productForm">
+              <input type="hidden" id="productId" />
+              <div class="mb-3">
+                <label class="form-label">Title</label>
                 <input
                   type="text"
-                  id="searchInput"
                   class="form-control"
-                  placeholder="Nhập tên sản phẩm để tìm kiếm..."
+                  id="productTitle"
+                  required
                 />
               </div>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">
-                <i class="bi bi-sort-down me-2"></i>Sắp xếp
-              </label>
-              <select class="form-select" id="sortSelect">
-                <option value="">-- Chọn sắp xếp --</option>
-                <option value="name-asc">Tên (A → Z)</option>
-                <option value="name-desc">Tên (Z → A)</option>
-                <option value="price-asc">Giá (Thấp → Cao)</option>
-                <option value="price-desc">Giá (Cao → Thấp)</option>
-              </select>
-            </div>
+              <div class="mb-3">
+                <label class="form-label">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="productPrice"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea
+                  class="form-control"
+                  id="productDescription"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Category Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productCategory"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Image URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productImage"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="saveProduct()"
+            >
+              Lưu
+            </button>
           </div>
         </div>
-
-        <!-- Products Table -->
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th><i class="bi bi-hash me-2"></i>ID</th>
-                <th><i class="bi bi-tag me-2"></i>Tên Sản Phẩm</th>
-                <th><i class="bi bi-cash me-2"></i>Giá</th>
-                <th><i class="bi bi-folder me-2"></i>Danh Mục</th>
-                <th><i class="bi bi-image me-2"></i>Hình Ảnh</th>
-              </tr>
-            </thead>
-            <tbody class="table-id"></tbody>
-          </table>
-        </div>
-
-        <!-- Pagination -->
-        <nav>
-          <ul class="pagination justify-content-center" id="pagination"></ul>
-        </nav>
       </div>
     </div>
 
-
-    <!-- Bootstrap JS + Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JS -->
-    <script src="./main.js"></script>
   </body>
 </html>
