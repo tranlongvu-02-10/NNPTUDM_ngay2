@@ -1,473 +1,462 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Management</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
-    />
-
+    <title>Posts & Comments Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
       * {
-        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
       body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
-        padding: 40px 0;
+        padding: 30px 20px;
       }
 
-      .main-container {
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        padding: 40px;
-        max-width: 1400px;
+      .container {
+        max-width: 1200px;
         margin: 0 auto;
       }
 
-      h1 {
-        font-weight: 700;
-        color: #2d3748;
+      .header {
+        text-align: center;
+        color: white;
         margin-bottom: 40px;
-        position: relative;
-        padding-bottom: 15px;
       }
 
-      h1::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100px;
-        height: 4px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-        border-radius: 2px;
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       }
 
-      .controls-section {
-        background: #f7fafc;
-        padding: 25px;
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      .deleted {
+        text-decoration: line-through;
+        color: #999;
+        opacity: 0.6;
+      }
+
+      .section {
+        background: white;
         border-radius: 15px;
+        padding: 30px;
         margin-bottom: 30px;
-        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        animation: slideUp 0.5s ease-out;
       }
 
-      .form-control,
-      .form-select {
-        border: 2px solid #e2e8f0;
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section h2 {
+        color: #667eea;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #667eea;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section h2 i {
+        font-size: 1.6rem;
+      }
+
+      /* Checkbox styling */
+      .checkbox-container {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .checkbox-container label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        color: #333;
+        user-select: none;
+      }
+
+      .checkbox-container input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        accent-color: #667eea;
+      }
+
+      /* Table styling */
+      .table-container {
+        overflow-x: auto;
+        margin-bottom: 25px;
         border-radius: 10px;
-        padding: 12px 16px;
-        transition: all 0.3s ease;
-        font-size: 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
-      .form-control:focus,
-      .form-select:focus {
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+      }
+
+      thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 0.95rem;
+      }
+
+      tbody tr {
+        transition: all 0.3s ease;
+      }
+
+      tbody tr:hover {
+        background-color: #f8f9ff;
+        transform: scale(1.01);
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* Form styling */
+      .form-container {
+        background: #f8f9ff;
+        padding: 25px;
+        border-radius: 10px;
+        border: 2px solid #e8eaf6;
+      }
+
+      .form-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+      }
+
+      input[type="text"]:focus,
+      input[type="number"]:focus {
+        outline: none;
         border-color: #667eea;
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
       }
 
-      .btn {
-        border-radius: 10px;
-        padding: 12px 24px;
-        font-weight: 600;
-        transition: all 0.3s ease;
+      input[readonly] {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      input[type="submit"],
+      input[type="button"],
+      button {
+        padding: 12px 25px;
         border: none;
-      }
-
-      .btn-success {
-        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-        box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
-      }
-
-      .btn-success:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-      }
-
-      .btn-warning {
-        background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
-        color: white;
-        box-shadow: 0 4px 15px rgba(246, 173, 85, 0.4);
-      }
-
-      .btn-warning:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(246, 173, 85, 0.5);
-        color: white;
-      }
-
-      .btn-danger {
-        background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
-        box-shadow: 0 4px 15px rgba(252, 129, 129, 0.4);
-      }
-
-      .btn-danger:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(252, 129, 129, 0.5);
-      }
-
-      .btn-sm {
-        padding: 8px 16px;
-        font-size: 13px;
-      }
-
-      .table-responsive {
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      }
-
-      .table {
-        margin-bottom: 0;
-      }
-
-      .table thead {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-      }
-
-      .table thead th {
-        border: none;
-        padding: 18px 15px;
+        border-radius: 8px;
+        font-size: 0.95rem;
         font-weight: 600;
-        text-transform: uppercase;
-        font-size: 13px;
-        letter-spacing: 0.5px;
-      }
-
-      .table tbody tr {
-        transition: all 0.3s ease;
-      }
-
-      .table tbody tr:hover {
-        background-color: #f7fafc;
-        transform: scale(1.01);
-      }
-
-      .table tbody td {
-        vertical-align: middle;
-        padding: 20px 15px;
-        border-bottom: 1px solid #e2e8f0;
-      }
-
-      .product-img {
         cursor: pointer;
         transition: all 0.3s ease;
-        max-width: 80px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-family: inherit;
       }
 
-      .product-img:hover {
-        transform: scale(1.15);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .img-container {
-        position: relative;
-        display: inline-block;
-      }
-
-      .img-description {
-        display: none;
-        position: absolute;
-        background: rgba(0, 0, 0, 0.95);
-        color: white;
-        padding: 15px;
-        border-radius: 10px;
-        z-index: 1000;
-        max-width: 300px;
-        font-size: 12px;
-        bottom: 90px;
-        left: 50%;
-        transform: translateX(-50%);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        line-height: 1.5;
-      }
-
-      .img-description::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid rgba(0, 0, 0, 0.95);
-      }
-
-      .img-container:hover .img-description {
-        display: block;
-        animation: fadeIn 0.3s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateX(-50%) translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(-50%) translateY(0);
-        }
-      }
-
-      .badge {
-        padding: 8px 14px;
-        border-radius: 20px;
-        font-weight: 500;
-        font-size: 12px;
-      }
-
-      .badge-category {
+      input[type="submit"],
+      button.btn-save {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
       }
 
-      .price-tag {
-        color: #48bb78;
-        font-weight: 700;
-        font-size: 16px;
+      input[type="submit"]:hover,
+      button.btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
       }
 
-      .modal-content {
-        border-radius: 20px;
-        border: none;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      input[type="button"],
+      button.btn-clear {
+        background: #e0e0e0;
+        color: #333;
       }
 
-      .modal-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: 20px 20px 0 0;
-        padding: 25px 30px;
-        border: none;
-      }
-
-      .modal-title {
-        font-weight: 700;
-        font-size: 24px;
-      }
-
-      .modal-body {
-        padding: 30px;
-      }
-
-      .modal-footer {
-        border-top: 1px solid #e2e8f0;
-        padding: 20px 30px;
-      }
-
-      .btn-close {
-        filter: brightness(0) invert(1);
-      }
-
-      .pagination {
-        margin-top: 30px;
-      }
-
-      .page-link {
-        border: 2px solid #e2e8f0;
-        color: #667eea;
-        margin: 0 5px;
-        border-radius: 10px;
-        padding: 10px 16px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-      }
-
-      .page-link:hover {
-        background: #667eea;
-        border-color: #667eea;
-        color: white;
+      input[type="button"]:hover,
+      button.btn-clear:hover {
+        background: #d0d0d0;
         transform: translateY(-2px);
       }
 
-      .page-item.active .page-link {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-color: #667eea;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-      }
-
-      .form-label {
-        font-weight: 600;
-        color: #2d3748;
-        margin-bottom: 8px;
-        font-size: 14px;
-      }
-
+      /* Action buttons in table */
       .action-buttons {
         display: flex;
         gap: 8px;
       }
 
-      /* Responsive adjustments */
+      .btn-edit,
+      .btn-delete {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .btn-edit {
+        background-color: #4CAF50;
+        color: white;
+      }
+
+      .btn-edit:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+      }
+
+      .btn-delete {
+        background-color: #f44336;
+        color: white;
+      }
+
+      .btn-delete:hover {
+        background-color: #da190b;
+        transform: scale(1.05);
+      }
+
+      /* Responsive design */
       @media (max-width: 768px) {
-        .main-container {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .section {
           padding: 20px;
-          border-radius: 15px;
         }
 
-        h1 {
-          font-size: 24px;
+        .section h2 {
+          font-size: 1.5rem;
         }
 
-        .controls-section {
-          padding: 15px;
+        .form-group {
+          grid-template-columns: 1fr;
         }
 
-        .table {
-          font-size: 13px;
+        th, td {
+          padding: 10px;
+          font-size: 0.85rem;
         }
 
-        .btn {
-          padding: 10px 20px;
-          font-size: 13px;
+        .action-buttons {
+          flex-direction: column;
         }
-      }
-
-      /* Search input icon */
-      .search-wrapper {
-        position: relative;
-      }
-
-      .search-wrapper::before {
-        content: '\F52A';
-        font-family: 'bootstrap-icons';
-        position: absolute;
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #a0aec0;
-        font-size: 16px;
-        z-index: 1;
-      }
-
-      .search-wrapper input {
-        padding-left: 45px;
       }
 
       /* Loading animation */
       .loading {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: white;
-        animation: spin 1s ease-in-out infinite;
+        text-align: center;
+        padding: 20px;
+        color: #667eea;
+      }
+
+      .loading i {
+        font-size: 2rem;
+        animation: spin 1s linear infinite;
       }
 
       @keyframes spin {
-        to {
+        100% {
           transform: rotate(360deg);
         }
       }
+
+      /* Badge styling */
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .badge-success {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .badge-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+      }
     </style>
+    <script defer src="main.js"></script>
   </head>
+
   <body>
     <div class="container">
-      <div class="main-container">
-        <h1 class="text-center">
-          <i class="bi bi-bag-check-fill me-2"></i>Quản Lý Sản Phẩm
-        </h1>
+      <!-- Header -->
+      <div class="header">
+        <h1><i class="fas fa-clipboard-list"></i> Posts & Comments Management</h1>
+        <p>Manage your posts and comments efficiently</p>
+      </div>
 
-        <!-- Search and Sort Controls -->
-        <div class="controls-section">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">
-                <i class="bi bi-search me-2"></i>Tìm kiếm
-              </label>
-              <div class="search-wrapper">
-                <input
-                  type="text"
-                  id="searchInput"
-                  class="form-control"
-                  placeholder="Nhập tên sản phẩm để tìm kiếm..."
-                />
-              </div>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">
-                <i class="bi bi-sort-down me-2"></i>Sắp xếp
-              </label>
-              <select class="form-select" id="sortSelect">
-                <option value="">-- Chọn sắp xếp --</option>
-                <option value="name-asc">Tên (A → Z)</option>
-                <option value="name-desc">Tên (Z → A)</option>
-                <option value="price-asc">Giá (Thấp → Cao)</option>
-                <option value="price-desc">Giá (Cao → Thấp)</option>
-              </select>
-            </div>
-          </div>
+      <!-- Posts Section -->
+      <div class="section">
+        <h2>
+          <i class="fas fa-newspaper"></i>
+          Posts Management
+        </h2>
+        
+        <div class="checkbox-container">
+          <label>
+            <input type="checkbox" id="showDeleted" onchange="Load()" />
+            <span>Hiển thị posts đã xóa</span>
+          </label>
         </div>
 
-        <!-- Products Table -->
-        <div class="table-responsive">
-          <table class="table table-hover">
+        <div class="table-container">
+          <table>
             <thead>
               <tr>
-                <th><i class="bi bi-hash me-2"></i>ID</th>
-                <th><i class="bi bi-tag me-2"></i>Tên Sản Phẩm</th>
-                <th><i class="bi bi-cash me-2"></i>Giá</th>
-                <th><i class="bi bi-folder me-2"></i>Danh Mục</th>
-                <th><i class="bi bi-image me-2"></i>Hình Ảnh</th>
+                <th><i class="fas fa-hashtag"></i> ID</th>
+                <th><i class="fas fa-heading"></i> Title</th>
+                <th><i class="fas fa-eye"></i> Views</th>
+                <th><i class="fas fa-cog"></i> Actions</th>
               </tr>
             </thead>
-            <tbody class="table-id"></tbody>
+            <tbody id="table-body">
+              <!-- Dynamic content -->
+            </tbody>
           </table>
         </div>
 
-        <!-- Pagination -->
-        <nav>
-          <ul class="pagination justify-content-center" id="pagination"></ul>
-        </nav>
+        <div class="form-container">
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="ID (tự động tạo)"
+              id="id_txt"
+              readonly
+            />
+            <input 
+              type="text" 
+              placeholder="Nhập tiêu đề bài viết" 
+              id="title_txt" 
+            />
+            <input 
+              type="number" 
+              placeholder="Số lượt xem" 
+              id="views_txt" 
+              min="0"
+            />
+          </div>
+          <div class="button-group">
+            <input type="submit" value=" Save Post" onclick="Save()" />
+            <input type="button" value=" Clear" onclick="ClearPostForm()" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="section">
+        <h2>
+          <i class="fas fa-comments"></i>
+          Comments Management
+        </h2>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th><i class="fas fa-hashtag"></i> ID</th>
+                <th><i class="fas fa-comment"></i> Comment</th>
+                <th><i class="fas fa-link"></i> Post ID</th>
+                <th><i class="fas fa-cog"></i> Actions</th>
+              </tr>
+            </thead>
+            <tbody id="comments-body">
+              <!-- Dynamic content -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-container">
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="ID (tự động tạo)"
+              id="comment_id_txt"
+              readonly
+            />
+            <input 
+              type="text" 
+              placeholder="Nhập nội dung comment" 
+              id="comment_text_txt" 
+            />
+            <input 
+              type="text" 
+              placeholder="ID bài viết" 
+              id="comment_postId_txt" 
+            />
+          </div>
+          <div class="button-group">
+            <input type="submit" value=" Save Comment" onclick="SaveComment()" />
+            <input type="button" value=" Clear" onclick="ClearCommentForm()" />
+          </div>
+        </div>
       </div>
     </div>
-
-
-    <!-- Bootstrap JS + Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JS -->
-    <script src="./main.js"></script>
   </body>
 </html>
